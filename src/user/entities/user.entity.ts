@@ -10,5 +10,14 @@ export class User {
   name: string;
 
   @Column()
-  role: string;
+  email: string;
+
+  @Column()
+  description: string;
+
+  constructor(name: string, description: string, email: string) {
+    this.name = name;
+    this.email = email;
+    this.description = description;
+  }
 }
