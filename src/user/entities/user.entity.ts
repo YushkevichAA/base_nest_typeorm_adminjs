@@ -1,11 +1,8 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
-import { v4 } from 'uuid';
+import { BaseEntity } from 'src/common/entities/base.entities';
+import { Column, Entity } from 'typeorm';
 
 @Entity()
-export class User {
-  @PrimaryColumn()
-  id: string = v4();
-
+export class User extends BaseEntity {
   @Column()
   name: string;
 
@@ -16,6 +13,7 @@ export class User {
   description: string;
 
   constructor(name: string, description: string, email: string) {
+    super();
     this.name = name;
     this.email = email;
     this.description = description;
