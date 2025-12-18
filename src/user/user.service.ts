@@ -16,7 +16,7 @@ export class UserService {
       email,
     });
 
-    if (!isExist) {
+    if (isExist) {
       return {
         status: 'error',
         message: 'user is exist',
