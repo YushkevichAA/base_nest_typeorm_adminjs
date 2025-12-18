@@ -3,6 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { USER_REPOSITORY } from 'src/constants';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
@@ -37,12 +38,12 @@ export class UserService {
   }
 
   async findOne(id: string) {
-    return await this.userRepository.findOneByOrFail({ id });
+    return await this.userRepository.findOneByOrFail({ id } as any);
   }
 
-  // update(id: number, updateUserDto: UpdateUserDto) {
-  //   return `This action updates a #${id} user`;
-  // }
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    return await this.userRepository.update(id, updateUserDto);
+  }
 
   // remove(id: number) {
   //   return `This action removes a #${id} user`;
