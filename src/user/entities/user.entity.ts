@@ -1,8 +1,12 @@
-import { BaseEntity } from './../../common/entities/base.entity';
-import { Column, Entity } from 'typeorm';
+// import { BaseEntity } from './../../common/entities/base.entity';
+import { BaseEntity, Column, Entity, PrimaryColumn } from 'typeorm';
+import { v4 } from 'uuid';
 
 @Entity()
 export class User extends BaseEntity {
+  @PrimaryColumn('uuid')
+  id: string = v4();
+
   @Column()
   name: string;
 

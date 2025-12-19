@@ -1,8 +1,19 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+// import { Database, Resource } from '@adminjs/typeorm';
 
 async function bootstrap() {
+  await import('adminjs').then(async ({ AdminJS }) => {
+    const { Database, Resource } = await import('@adminjs/typeorm').then(
+      ({ Database, Resource }) => ({ Database, Resource }),
+    );
+    AdminJS.registerAdapter({
+      Resource,
+      Database,
+    });
+  });
+
   const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
     .setTitle('Cats example')
