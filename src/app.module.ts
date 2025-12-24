@@ -39,11 +39,6 @@ import { join } from 'path';
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'static'),
       serveRoot: '/static',
-      exclude: ['/api/{*test}'],
-      serveStaticOptions: {
-        fallthrough: false,
-      },
-      // serveStaticOptions: { index: false },
     }),
     AdminModule,
     DatabaseModule,

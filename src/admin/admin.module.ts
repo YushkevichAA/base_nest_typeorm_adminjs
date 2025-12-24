@@ -10,11 +10,11 @@ import { createUserResource } from './resources/user.resource';
             rootPath: '/admin',
             resources: [createUserResource()],
             branding: {
-              companyName: 'Remote Info, pagina di demo',
+              companyName: 'Тестовое название',
 
               withMadeWithLove: false,
-              logo: 'http://localhost:3000/logo.jpg',
-              favicon: 'http://localhost:3000/favicon.png',
+              logo: 'http://localhost:3000/static/logo128.png',
+              favicon: 'http://localhost:3000/static/favicon.ico',
             },
           },
         }),
