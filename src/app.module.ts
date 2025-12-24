@@ -5,8 +5,9 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { DatabaseModule } from './database/database.module';
-import { User } from './user/entities/user.entity';
-// import { Database, Resource } from '@adminjs/typeorm';
+import { AdminModule } from './admin/admin.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 // import('adminjs').then(({ AdminJS }) =>
 //   AdminJS.registerAdapter({
@@ -35,33 +36,16 @@ import { User } from './user/entities/user.entity';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    import('@adminjs/nestjs').then(({ AdminModule }) =>
-      AdminModule.createAdminAsync({
-        useFactory: () => ({
-          adminJsOptions: {
-            rootPath: '/admin',
-            resources: [
-              {
-                resource: User,
-                options: {
-                  id: 'users',
-                  properties: {
-                    id: {
-                      isVisible: {
-                        edit: false,
-                        show: true,
-                        list: true,
-                        filter: false,
-                      },
-                    },
-                  },
-                },
-              },
-            ],
-          },
-        }),
-      }),
-    ),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'static'),
+      serveRoot: '/static',
+      exclude: ['/api/{*test}'],
+      serveStaticOptions: {
+        fallthrough: false,
+      },
+      // serveStaticOptions: { index: false },
+    }),
+    AdminModule,
     DatabaseModule,
     UserModule,
   ],
