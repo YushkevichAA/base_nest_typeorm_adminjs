@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { createUserResource } from './resources/user.resource';
+import { componentLoader } from './components';
 
 @Module({
   imports: [
@@ -9,6 +10,7 @@ import { createUserResource } from './resources/user.resource';
           adminJsOptions: {
             rootPath: '/admin',
             resources: [createUserResource()],
+            componentLoader,
             branding: {
               companyName: 'Тестовое название',
 
