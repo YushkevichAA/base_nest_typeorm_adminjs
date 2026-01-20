@@ -1,8 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-// import { Database, Resource } from '@adminjs/typeorm';
-
 async function bootstrap() {
   await import('adminjs').then(async ({ AdminJS }) => {
     const { Database, Resource } = await import('@adminjs/typeorm').then(

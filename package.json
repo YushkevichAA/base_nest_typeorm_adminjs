@@ -23,6 +23,7 @@
   "dependencies": {
     "@adminjs/design-system": "^4.1.1",
     "@adminjs/express": "^6.1.1",
+    "@adminjs/import-export": "^3.0.0",
     "@adminjs/nestjs": "^7.0.0",
     "@adminjs/typeorm": "^5.0.1",
     "@nestjs/common": "^11.0.1",

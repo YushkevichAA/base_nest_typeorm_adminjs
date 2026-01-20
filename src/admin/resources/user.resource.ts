@@ -2,22 +2,48 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { User } from 'src/user/entities/user.entity';
-import { Components } from '../components';
+import { Components } from './../componentLoader';
+import CustomAction from '../components/custom-action';
 
-const customBeefore = (request, context) => {
-  const { query = {} } = request;
-  const newQuery = {
-    ...query,
-    ['filters.name']: 'active',
-  };
-  request.query = newQuery;
-  return request;
+// гард для проверки является ли ресурс владельцем или админом
+export const onlyForOwnerOrAdmit = (request, response, context) => {
+  const { record, currentAdmin } = context;
+  return currentAdmin.role === 'admin' || record.ownerId === currentAdmin.id;
 };
 
-const customAfter = (originalResponse, request, context) => {
-  console.log(originalResponse.meta);
-  return originalResponse;
-};
+// const testFeature = (admin, opts): any => {
+//   console.log('✅ Этот фича-функция вызвана!');
+//   return opts;
+// };
+
+// const bootLoggerFeature = async () => {
+//   return await import('@adminjs/logger').then((data) => {
+//     const loggerFeature = data.default;
+//     console.log('запуск логгера');
+//     loggerFeature({
+//       componentLoader,
+//       propertiesMapping: {
+//         user: 'userId',
+//       },
+//       userIdAttribute: 'id',
+//     });
+//   });
+// };
+
+// const customBeefore = (request, context) => {
+//   const { query = {} } = request;
+//   const newQuery = {
+//     ...query,
+//     ['filters.name']: 'active',
+//   };
+//   request.query = newQuery;
+//   return request;
+// };
+
+// const customAfter = (originalResponse, request, context) => {
+//   console.log(originalResponse.meta);
+//   return originalResponse;
+// };
 
 export const createUserResource = () => ({
   resource: User,
@@ -55,6 +81,7 @@ export const createUserResource = () => ({
           };
         },
       },
+      customAction: CustomAction,
       // list: {
       //   // before: [customBeefore],
       //   after: [customAfter],
@@ -87,4 +114,5 @@ export const createUserResource = () => ({
       // },
     },
   },
+  features: [],
 });
