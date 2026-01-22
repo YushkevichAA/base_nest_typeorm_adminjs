@@ -9,7 +9,7 @@ import {
 const CustomAction: FC<ActionProps> = (props) => {
   const [currentAdmin] = useCurrentAdmin();
   const newProps = { ...props };
-  console.log(currentAdmin);
+  // console.log(currentAdmin);
   // This is important - `component` option controls which custom
   // component is rendered by `BaseActionComponent` and we don't
   // want to render this code here again. That would create an
