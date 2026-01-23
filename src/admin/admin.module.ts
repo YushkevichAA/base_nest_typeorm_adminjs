@@ -21,10 +21,10 @@ const authenticate = async (email: string, password: string) => {
       AdminModule.createAdminAsync({
         useFactory: () => ({
           adminJsOptions: {
-            dashboard: {
-              component: Components.Dashboard,
-              handler: dashboardHandler,
-            },
+            // dashboard: {
+            //   component: Components.Dashboard,
+            //   handler: dashboardHandler,
+            // },
             rootPath: '/admin',
             resources: [createUserResource()],
             componentLoader,
@@ -36,16 +36,16 @@ const authenticate = async (email: string, password: string) => {
               favicon: 'http://localhost:3000/static/favicon.ico',
             },
           },
-          auth: {
-            authenticate,
-            cookieName: 'adminjs',
-            cookiePassword: 'secret',
-          },
-          sessionOptions: {
-            resave: true,
-            saveUninitialized: true,
-            secret: 'secret',
-          },
+          // auth: {
+          //   authenticate,
+          //   cookieName: 'adminjs',
+          //   cookiePassword: 'secret',
+          // },
+          // sessionOptions: {
+          //   resave: true,
+          //   saveUninitialized: true,
+          //   secret: 'secret',
+          // },
         }),
       }),
     ),

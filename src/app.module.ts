@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { DatabaseModule } from './database/database.module';
-// import { AdminModule } from './admin/admin.module';
+import { AdminModule } from './admin/admin.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
@@ -41,7 +41,7 @@ import { AuthModule } from './auth/auth.module';
       rootPath: join(__dirname, '..', 'static'),
       serveRoot: '/static',
     }),
-    // AdminModule,
+    AdminModule,
     DatabaseModule,
     UserModule,
     AuthModule,

@@ -18,9 +18,9 @@ const DesignSystemExample: FC = () => {
       })
       .catch((error) => {
         if (error instanceof Error) {
-          console.log(error.message);
+          // console.log(error.message);
         }
-        console.log(error);
+        // console.log(error);
         // handle any errors
       });
   }, []);

@@ -45,74 +45,76 @@ export const onlyForOwnerOrAdmit = (request, response, context) => {
 //   return originalResponse;
 // };
 
-export const createUserResource = () => ({
-  resource: User,
-  options: {
-    listProperties: ['id', 'name', 'email', 'createdAt'],
-    filterProperties: ['id', 'name', 'createdAt'],
-    editProperties: ['name', 'email', 'gender', 'randomPicture', 'description'],
-    showProperties: [
-      'id',
-      'name',
-      'email',
-      'gender',
-      'randomPicture',
-      'createdAt',
-    ],
-    sort: {
-      sortBy: 'updatedAt',
-      direction: 'asc',
-    },
-    // may be as variable usersNavigation, this create menu sections
-    navigation: {
-      name: 'Пользователи',
-      icon: 'User',
-    },
-    actions: {
-      myCustomAction: {
-        actionType: 'record',
-        component: Components.MyCustomAction, // see "Writing your own Components"
-        handler: (request, response, context) => {
-          const { record, currentAdmin } = context;
+export const createUserResource = () => {
+  return {
+    resource: User,
+    options: {
+      listProperties: ['id', 'name', 'email', 'createdAt'],
+      filterProperties: ['id', 'name', 'createdAt'],
+      editProperties: [
+        'name',
+        'email',
+        'gender',
+        'password',
+        'randomPicture',
+        'description',
+      ],
+      showProperties: [
+        'id',
+        'name',
+        'email',
+        'gender',
+        'randomPicture',
+        'createdAt',
+      ],
+      sort: {
+        sortBy: 'updatedAt',
+        direction: 'asc',
+      },
+      // may be as variable usersNavigation, this create menu sections
+      navigation: {
+        name: 'Пользователи',
+        icon: 'User',
+      },
+      actions: {
+        myCustomAction: {
+          actionType: 'record',
+          component: Components.MyCustomAction, // see "Writing your own Components"
+          handler: (request, response, context) => {
+            const { record, currentAdmin } = context;
 
-          return {
-            record: record.toJSON(currentAdmin),
-            msg: 'Hello world',
-          };
+            return {
+              record: record.toJSON(currentAdmin),
+              msg: 'Hello world',
+            };
+          },
+        },
+        // customAction: CustomAction,
+        // list: {
+        //   // before: [customBeefore],
+        //   after: [customAfter],
+        // },
+        // edit: {
+        //   isAccessible: () => {
+        //     // const { record } = context;
+        //     // alert(record);
+        //     // позволяет редактировать свойство только если сущность создана текущим пользователем
+        //     return 'someidadmin' === 'someidadmin';
+        //   },
+        //   isVisible: true,
+        // },
+      },
+      properties: {
+        gender: {
+          availableValues: [
+            { value: 'male', label: 'Male' },
+            { value: 'female', label: 'Female' },
+            { value: 'other', label: 'Other' },
+            { value: 'notSay', label: 'Rather not say' },
+          ],
         },
       },
-      customAction: CustomAction,
-      // list: {
-      //   // before: [customBeefore],
-      //   after: [customAfter],
-      // },
-      // edit: {
-      //   isAccessible: () => {
-      //     // const { record } = context;
-      //     // alert(record);
-      //     // позволяет редактировать свойство только если сущность создана текущим пользователем
-      //     return 'someidadmin' === 'someidadmin';
-      //   },
-      //   isVisible: true,
-      // },
     },
-    properties: {
-      randomPicture: {
-        type: 'string',
-        components: {
-          list: Components.MyCustomAction, // see "Writing your own Components"
-          show: Components.MyCustomAction,
-        },
-      },
-      // gender: {
-      //   availableValues: [
-      //     { value: 'male', label: 'Male' },
-      //     { value: 'female', label: 'Female' },
-      //     { value: 'other', label: 'Other' },
-      //     { value: 'notSay', label: 'Rather not say' },
-      //   ],
-      // },
-    },
-  },
-  features: [],
-});
+    // features: [],
+  };
+};
